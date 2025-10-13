@@ -2,6 +2,8 @@ import express, { Application } from "express";
 import Router from "./routes/api";
 import cors from "cors";
 import dotenv from "dotenv";
+import cron from "node-cron";
+import { startJobsEveryMidNight } from "./job";
 
 class Server {
   private app: Application;
@@ -22,8 +24,16 @@ class Server {
 
   public start(): void {
     const PORT = process.env.PORT || 3000;
+
+    // cron every day at midnight
+    cron.schedule("0 0 * * *", () => {
+      console.log("Running a task every day at midnight");
+      // Add your scheduled task logic here
+      startJobsEveryMidNight();
+    });
+
     this.app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+      console.log(`Server is running on port http://localhost:${PORT}`);
     });
   }
 
