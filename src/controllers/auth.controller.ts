@@ -39,7 +39,7 @@ class AuthController {
       if (!user) {
         return res
           .status(401)
-          .json(response401({ message: "credential tidak valid" }));
+          .json(response401({ message: "NIM atau password tidak valid" }));
       }
 
       const hashed = hashPassword(password, nim.toUpperCase());

@@ -1,7 +1,9 @@
+import cron from "node-cron";
 import express, { Application, Request, Response } from "express";
 import Router from "./routes/api";
 import cors from "cors";
 import dotenv from "dotenv";
+import { startJobsEveryMidNight } from "./job";
 
 class Server {
   private app: Application;
@@ -19,6 +21,13 @@ class Server {
 
     this.app.get("/", this.defaultRoute);
     this.app.use("/api", Router);
+
+    // cron every day at midnight
+    cron.schedule("0 0 * * *", () => {
+      console.log("Running a task every day at midnight");
+      // Add your scheduled task logic here
+      startJobsEveryMidNight();
+    });
   }
 
   private defaultRoute(req: Request, res: Response) {
