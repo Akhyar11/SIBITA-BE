@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/teknonu1/nodeapps/sibita-be
+    - export DEPLOYPATH=/home/teknonu1/sibita
 
     # Step 1: Copy seluruh file dari repository ke folder Node.js App
     - /bin/rsync -a --delete ./ $DEPLOYPATH/
@@ -10,7 +10,7 @@ deployment:
     - cd $DEPLOYPATH
 
     # Step 3: Aktifkan virtual environment Node.js
-    - source /home/teknonu1/nodevenv/nodeapps/sibita-be/20/bin/activate
+    - source /home/teknonu1/nodevenv/sibita/20/bin/activate
 
     # Step 4: Install dependencies
     - npm install
