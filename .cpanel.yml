@@ -15,16 +15,13 @@ deployment:
     - cd $DEPLOYPATH
 
     # # Step 3: Aktifkan virtual environment Node.js
-    # - source /home/teknonu1/nodevenv/sibita/22/bin/activate
+    - source /home/teknonu1/nodevenv/sibita/22/bin/activate
 
     # # Step 4: Install dependencies
-    # - npm install
+    - npm install
 
     # # Step 5: Build TypeScript
-    # - npm run build
+    - npm run build
 
     # # Step 6: Jalankan migration jika diperlukan
-    # - npx sequelize-cli db:migrate
-
-    # # Step 7: Restart aplikasi Node.js
-    # - touch tmp/restart.txt
+    - npx sequelize-cli db:migrate
