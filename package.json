@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src --exec ts-node src/main-dev.ts",
-    "start": "node dist/main-dev.js",
+    "dev": "nodemon --watch src --exec ts-node main-dev.ts",
+    "start": "node main-dev.js",
     "build": "tsc",
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all",
