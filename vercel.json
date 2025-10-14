@@ -1,5 +1,13 @@
 {
   "version": 2,
-  "builds": [{ "src": "main.ts", "use": "@vercel/node" }],
+  "builds": [
+    {
+      "src": "main.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["node_modules/mysql2/**/*"]
+      }
+    }
+  ],
   "routes": [{ "src": "/(.*)", "dest": "main.ts" }]
 }
