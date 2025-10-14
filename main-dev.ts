@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import cron from "node-cron";
 import { startJobsEveryMidNight } from "./src/job";
 
-class Server {
+export class Server {
   private app: Application;
 
   constructor() {
@@ -42,5 +42,10 @@ class Server {
   }
 }
 
-const server = new Server();
-server.start();
+// Menjalankan server langsung jika file ini dijalankan secara langsung
+if (require.main === module) {
+  (async () => {
+    const server = new Server();
+    server.start();
+  })();
+}
