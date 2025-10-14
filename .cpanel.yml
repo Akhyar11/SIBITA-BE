@@ -11,11 +11,8 @@ deployment:
     - /bin/rm -rf $DEPLOYPATH/*
     - /bin/cp -R * $DEPLOYPATH/
 
-    # 4. Masuk ke folder aplikasi
-    - cd $DEPLOYPATH
-
     # # Step 3: Aktifkan virtual environment Node.js
-    - source /home/teknonu1/nodevenv/sibita/22/bin/activate
+    - source /home/teknonu1/nodevenv/public_html/sibita.teknonusa.it.com/22/bin/activate && cd $DEPLOYPATH
 
     # # Step 4: Install dependencies
     - npm install
