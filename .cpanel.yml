@@ -1,12 +1,17 @@
 ---
 deployment:
   tasks:
+    # 1. Set lokasi deploy
     - export DEPLOYPATH=/home/teknonu1/public_html/sibita.teknonusa.it.com
 
-    # Step 1: Copy seluruh file dari repository ke folder Node.js App
-    - /bin/rsync -a --delete ./ $DEPLOYPATH/
+    # 2. Pastikan direktori tujuan ada
+    - /bin/mkdir -p $DEPLOYPATH
 
-    # Step 2: Masuk ke direktori app
+    # 3. Bersihkan file lama dan copy file baru
+    - /bin/rm -rf $DEPLOYPATH/*
+    - /bin/cp -R * $DEPLOYPATH/
+
+    # 4. Masuk ke folder aplikasi
     - cd $DEPLOYPATH
 
     # # Step 3: Aktifkan virtual environment Node.js
