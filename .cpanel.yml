@@ -1,24 +1,32 @@
 ---
 deployment:
   tasks:
-    # 1. Set lokasi deploy
+    # 1️⃣ Set lokasi deploy
     - export DEPLOYPATH=/home/teknonu1/public_html/sibita.teknonusa.it.com
 
-    # 2. Pastikan direktori tujuan ada
+    # 2️⃣ Pastikan direktori tujuan ada
     - /bin/mkdir -p $DEPLOYPATH
 
-    # 3. Bersihkan file lama dan copy file baru
+    # 3️⃣ Bersihkan file lama dan copy file baru
     - /bin/rm -rf $DEPLOYPATH/*
     - /bin/cp -R * $DEPLOYPATH/
 
-    # # Step 3: Aktifkan virtual environment Node.js
+    # 4️⃣ Aktifkan virtual environment Node.js
     - source /home/teknonu1/nodevenv/public_html/sibita.teknonusa.it.com/22/bin/activate && cd $DEPLOYPATH
 
-    # # Step 4: Install dependencies
+    # 5️⃣ Hentikan proses Node.js yang sedang berjalan (jika ada)
+    - echo "🛑 Stopping existing Node.js process (if any)..."
+    - pkill -f "node dist/main-dev.js" || true
+
+    # 6️⃣ Install dependencies
     - npm install
 
-    # # Step 5: Build TypeScript
+    # 7️⃣ Build TypeScript
     - npm run build
 
-    # # Step 6: Jalankan migration jika diperlukan
-    - npx sequelize-cli db:migrate
+    # 8️⃣ Jalankan migration jika diperlukan
+    - npx sequelize-cli db:migrate || true
+
+    # 9️⃣ Jalankan ulang aplikasi
+    - echo "🚀 Starting Node.js app..."
+    - nohup node dist/main-dev.js > app.log 2>&1 &
