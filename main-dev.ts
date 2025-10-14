@@ -1,9 +1,9 @@
 import express, { Application } from "express";
-import Router from "./routes/api";
+import Router from "./src/routes/api";
 import cors from "cors";
 import dotenv from "dotenv";
 import cron from "node-cron";
-import { startJobsEveryMidNight } from "./job";
+import { startJobsEveryMidNight } from "./src/job";
 
 class Server {
   private app: Application;
