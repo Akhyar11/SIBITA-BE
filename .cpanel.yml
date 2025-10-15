@@ -12,7 +12,7 @@ deployment:
     - /bin/cp -R * $DEPLOYPATH/
 
     # 4️⃣ Aktifkan virtual environment Node.js
-    - source /home/teknonu1/nodevenv/public_html/sibita.teknonusa.it.com/22/bin/activate && cd $DEPLOYPATH
+    - source /home/teknonu1/nodevenv/public_html/sibita.teknonusa.it.com/18/bin/activate && cd $DEPLOYPATH
 
     # 5️⃣ Hentikan proses Node.js yang sedang berjalan (jika ada)
     - echo "🛑 Stopping existing Node.js process (if any)..."
