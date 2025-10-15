@@ -29,26 +29,20 @@ class AuthController {
       password: string;
     } = req.body;
     if (!nim || !password) {
-      return res
-        .status(400)
-        .json(response400({ message: "NIM dan password dibutuhkan" }));
+      return response400(res, { message: "NIM dan password dibutuhkan" });
     }
 
     try {
       const user = await User.findByPk(nim);
       if (!user) {
-        return res
-          .status(401)
-          .json(response401({ message: "NIM atau password tidak valid" }));
+        return response401(res, { message: "NIM atau password tidak valid" });
       }
 
       const hashed = hashPassword(password, nim.toUpperCase());
 
       console.log(hashed, user.password);
       if (user.password !== hashed) {
-        return res
-          .status(401)
-          .json(response401({ message: "credential tidak valid" }));
+        return response401(res, { message: "credential tidak valid" });
       }
 
       // JWT Payload

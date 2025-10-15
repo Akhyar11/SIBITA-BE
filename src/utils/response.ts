@@ -1,24 +1,24 @@
+import { Response } from "express";
+
 export interface ResponseParams {
   message: string;
   [key: string]: any;
 }
 
-export const response200 = (params: ResponseParams) => {
-  return { status: true, code: 200, ...params };
-};
+const sendResponse = (
+  res: Response,
+  code: number,
+  status: boolean,
+  params: ResponseParams
+) => res.status(code).json({ status, code, ...params });
 
-export const response400 = (params: ResponseParams) => {
-  return { status: false, code: 400, ...params };
-};
+const makeResponse =
+  (code: number, status: boolean) => (res: Response, params: ResponseParams) =>
+    sendResponse(res, code, status, params);
 
-export const response401 = (params: ResponseParams) => {
-  return { status: false, code: 401, ...params };
-};
-
-export const response409 = (params: ResponseParams) => {
-  return { status: false, code: 409, ...params };
-};
-
-export const response500 = (params: ResponseParams) => {
-  return { status: false, code: 500, ...params };
-};
+export const response200 = makeResponse(200, true);
+export const response400 = makeResponse(400, false);
+export const response401 = makeResponse(401, false);
+export const response404 = makeResponse(404, false);
+export const response409 = makeResponse(409, false);
+export const response500 = makeResponse(500, false);
